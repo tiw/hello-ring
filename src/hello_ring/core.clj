@@ -1,10 +1,13 @@
 (ns hello-ring.core
-  (:use ring.adapter.jetty))
+  (:use ring.adapter.jetty)
+  (:use ring.middleware.json)
+  (:use ring.util.response))
 
-(defn app [req]
-  {:status 200
-   :headers {"Content-Type" "text/plain"}
-   :body "Hello, world"})
+(defn handler [request]
+  (response {:foo "bar"}))
+
+(def app
+  (wrap-json-response handler {:keywords? true}))
 
 (defn -main []
   (run-jetty app {:port 3000}))

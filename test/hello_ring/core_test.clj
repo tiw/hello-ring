@@ -6,7 +6,7 @@
   (let [req {}
         resp (app req)]
     (is (= 200 (:status resp)))
-    (is (= "Hello, world" (:body resp)))))
+    (is (= "{\"foo\":\"bar\"}"  (:body resp)))))
 
 (deftest test-mapper
   (let [m {:name "Jack" :age 34}
