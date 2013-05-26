@@ -1,12 +1,12 @@
 (ns hello-ring.core-test
-  (:require [clojure.test :refer :all]
-            [hello-ring.core :refer :all]))
+  (:require [clojure.test :refer :all ]
+            [hello-ring.core :refer :all ]))
 
 (deftest a-test
   (let [req {}
         resp (app req)]
     (is (= 200 (:status resp)))
-    (is (= "{\"foo\":\"bar\"}"  (:body resp)))))
+    (is (= "{\"foo\":\"bar\"}" (:body resp)))))
 
 (deftest test-mapper
   (let [m {:name "Jack" :age 34}
@@ -14,3 +14,8 @@
         age (:age m)]
     (is (= "Jack" name))
     (is (= 34 age))))
+
+(deftest assoc-in-map
+  (let [m {:name "Jack"}
+        am (assoc-in m [:headers "Content-Type"] "text/plain")]
+    (is (= {:name "Jack" :headers "Content-Type:text/plain"}))))
